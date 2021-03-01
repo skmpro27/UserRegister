@@ -6,6 +6,7 @@ public class UserRegistration {
 	private boolean check;
 	private String firstName;
 	private String lastName;
+	private String email;
 
 	Scanner sc = new Scanner(System.in);
 
@@ -36,9 +37,24 @@ public class UserRegistration {
                         System.out.print("Last name is valid");
         }
 
+	//UC3
+        public void checkEmail() {
+                System.out.print("\nEnter Email ID(Eg. abc.xyz@bl.co.in): ");
+                email = sc.nextLine();
+                boolean check = Pattern.compile("^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]{2,}+)*$").matcher(email).matches();
+                if (!check) {
+                        System.out.print("Invalid Email ID");
+                        checkEmail();
+                }
+                else
+                        System.out.print("Email ID is valid");
+        }
+
+	//main
 	public static void main(String args[]) {
 		UserRegistration user = new UserRegistration();
 		user.checkFirstName();
 		user.checkLastName();
+		user.checkEmail();
 	}
 }
