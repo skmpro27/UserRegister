@@ -65,11 +65,11 @@ public class UserRegistration {
                         System.out.print("Phone Number is valid");
         }
 
-	//UC5 and UC6
+	//UC5, UC6 and UC7
         public void checkPassword() {
                 System.out.print("\nEnter Password(8 to 10 character): ");
                 password = sc.nextLine();
-                check = Pattern.compile("(?=.*[A-Z]).{8,10}").matcher(password).matches();
+                check = Pattern.compile("(?=.*[0-9])(?=.*[A-Z]).{8,10}").matcher(password).matches();
                 if (!check) {
                         System.out.print("Invalid Password");
                         checkPassword();
