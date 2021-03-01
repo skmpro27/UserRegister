@@ -8,6 +8,7 @@ public class UserRegistration {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
+	private String password;
 
 	Scanner sc = new Scanner(System.in);
 
@@ -64,14 +65,28 @@ public class UserRegistration {
                         System.out.print("Phone Number is valid");
         }
 
+	//UC5
+        public void checkPassword() {
+                System.out.print("\nEnter Password(8 to 10 character): ");
+                password = sc.nextLine();
+                check = Pattern.compile(".{8,10}").matcher(password).matches();
+                if (!check) {
+                        System.out.print("Invalid Password");
+                        checkPassword();
+                }
+                else
+                        System.out.print("Password is valid");
+        }
+
 	//main
 	public static void main(String args[]) {
 		UserRegistration user = new UserRegistration();
-/*
+
 		user.checkFirstName();
 		user.checkLastName();
 		user.checkEmail();
-*/
 		user.checkPhoneNumber();
+
+		user.checkPassword();
 	}
 }
