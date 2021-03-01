@@ -7,6 +7,7 @@ public class UserRegistration {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String phoneNumber;
 
 	Scanner sc = new Scanner(System.in);
 
@@ -28,7 +29,7 @@ public class UserRegistration {
         public void checkLastName() {
                 System.out.print("\nEnter Last Name(starts with capital letter and write minimum 3 letter): ");
                 lastName = sc.nextLine();
-                boolean check = Pattern.compile("[A-Z]{1}[a-z]{2,}").matcher(lastName).matches();
+                check = Pattern.compile("[A-Z]{1}[a-z]{2,}").matcher(lastName).matches();
                 if (!check) {
                         System.out.print("Invalid last name");
                         checkLastName();
@@ -41,7 +42,7 @@ public class UserRegistration {
         public void checkEmail() {
                 System.out.print("\nEnter Email ID(Eg. abc.xyz@bl.co.in): ");
                 email = sc.nextLine();
-                boolean check = Pattern.compile("^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]{2,}+)*$").matcher(email).matches();
+                check = Pattern.compile("^[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]{2,}+)*$").matcher(email).matches();
                 if (!check) {
                         System.out.print("Invalid Email ID");
                         checkEmail();
@@ -50,11 +51,27 @@ public class UserRegistration {
                         System.out.print("Email ID is valid");
         }
 
+	//UC4
+        public void checkPhoneNumber() {
+                System.out.print("\nEnter Phone Number(Eg. 91 9944778822): ");
+                phoneNumber = sc.nextLine();
+                check = Pattern.compile("^[0-9]{1,3} [0-9]{10}$").matcher(phoneNumber).matches();
+                if (!check) {
+                        System.out.print("Invalid Phone Number");
+                        checkPhoneNumber();
+                }
+                else
+                        System.out.print("Phone Number is valid");
+        }
+
 	//main
 	public static void main(String args[]) {
 		UserRegistration user = new UserRegistration();
+/*
 		user.checkFirstName();
 		user.checkLastName();
 		user.checkEmail();
+*/
+		user.checkPhoneNumber();
 	}
 }
