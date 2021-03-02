@@ -67,15 +67,17 @@ public class UserRegistration {
 
 	//UC5, UC6 and UC7
         public void checkPassword() {
-                System.out.print("\nEnter Password(8 to 10 character): ");
+                System.out.print("\nEnter Password(8 to 12 character): ");
                 password = sc.nextLine();
-                check = Pattern.compile("(?=.*[0-9])(?=.*[A-Z]).{8,10}").matcher(password).matches();
-                if (!check) {
-                        System.out.print("Invalid Password");
-                        checkPassword();
+                check = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=[^$@!#%*?&]*[$#@!%*?&][^$@!#%*?&]*$).{8,12}").matcher(password).matches();
+                if (check) {
+                       	System.out.print("valid Password");
+
                 }
-                else
-                        System.out.print("Password is valid");
+                else {
+                        System.out.print("Invalid Password");
+			checkPassword();
+		}
         }
 
 	//main
@@ -90,3 +92,4 @@ public class UserRegistration {
 		user.checkPassword();
 	}
 }
+
