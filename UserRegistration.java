@@ -1,130 +1,127 @@
 
+
 import java.util.regex.*;
 import java.util.Scanner;
+
 public class UserRegistration {
 
-	private boolean check;
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String phoneNumber;
-	private String password;
-
-	private static final String PATTERN_FOR_NAME = "[A-Z]{1}[a-z]{2,}";
-	private static final String PATTERN_FOR_EMAIL = "^[a-zA-z0-9’*+/=?`{|}~^-]{1,}(?:\\.[a-zA-Z0-9’*+/=?`{|}~^-]+)*@[a-zA-Z0-9]{1,}(?:\\.[a-zA-Z,]{2,6})?(?:\\.[a-zA-Z,]{2,6})?$";
-	private static final String PATTERN_FOR_PHONE_NUMBER = "^[0-9]{1,3} [0-9]{10}$";
-	private static final String PATTERN_FOR_PASSWORD = "^(?=.*[A-Z])(?=.*[0-9])(?=[^$@!#%*?&]*[$#@!%*?&][^$@!#%*?&]*$).{8,12}";
-
-	Scanner sc = new Scanner(System.in);
-
-	public static String[] validId = {"abc@yahoo.com", "abc-100@yahoo.com,", "abc.100@yahoo.com", "abc111@abc.com,", "abc-100@abc.net,",
-				"abc.100@abc.com.au", "abc@1.com,", "abc@gmail.com.com", "abc+100@gmail.com"};
-
-	public static String[] invalidId = {"abc", "abc@.com.my", "abc123@gmail.a", "abc123@.com", "abc123@.com.com", ".abc@abc.com", "abc()*@gmail.com",
-				"abc@%*.com", "abc..2002@gmail.com", "abc.@gmail.com", "abc@abc@gmail.com", "abc@gmail.com.1a", "abc@gmail.com.aa.au"};
-	//UC1
-	public void checkFirstName() {
-		System.out.print("\nEnter First Name(starts with capital letter and write minimum 3 letter): ");
-		firstName = sc.nextLine();
-		check = Pattern.compile(PATTERN_FOR_NAME).matcher(firstName).matches();
-		if (!check) {
-			System.out.print("Invalid first name");
-			checkFirstName();
-		}
-		else
-			System.out.print("First name is valid");
-	}
+        private static boolean check;
+        private static String firstName;
+        private static String lastName;
+        private static String email;
+        private static String phoneNumber;
+        private static String password;
 
 
-        //UC2
-        public void checkLastName() {
-                System.out.print("\nEnter Last Name(starts with capital letter and write minimum 3 letter): ");
-                lastName = sc.nextLine();
-                check = Pattern.compile(PATTERN_FOR_NAME).matcher(lastName).matches();
+        private static final String PATTERN_FOR_NAME = "[A-Z]{1}[a-z]{2,}";
+        private static final String PATTERN_FOR_EMAIL = "^[a-zA-z0-9’*+/=?`{|}~^-]{1,}(?:\\.[a-zA-Z0-9’*+/=?`{|}~^-]+)*@[a-zA-Z0-9]{1,}(?:\\.[a-zA-Z,]{2,6})?(?:\\.[a-zA-Z,]{2,6})?$";
+        private static final String PATTERN_FOR_PHONE_NUMBER = "^[0-9]{1,3} [0-9]{10}$";
+        private static final String PATTERN_FOR_PASSWORD = "^(?=.*[A-Z])(?=.*[0-9])(?=[^$@!#%*?&]*[$#@!%*?&][^$@!#%*?&]*$).{8,12}";
+
+        public static String[] validId = {"abc@yahoo.com", "abc-100@yahoo.com,", "abc.100@yahoo.com", "abc111@abc.com,", "abc-100@abc.net,",
+                                "abc.100@abc.com.au", "abc@1.com,", "abc@gmail.com.com", "abc+100@gmail.com"};
+
+        public static String[] invalidId = {"abc", "abc@.com.my", "abc123@gmail.a", "abc123@.com", "abc123@.com.com", ".abc@abc.com", "abc()*@gmail.com",
+                                "abc@%*.com", "abc..2002@gmail.com", "abc.@gmail.com", "abc@abc@gmail.com", "abc@gmail.com.1a", "abc@gmail.com.aa.au"};
+
+        private static Scanner sc = new Scanner(System.in);
+
+        //UC1
+        public static void checkValid(String str, String pattern) {
+                System.out.print("Enter " + str);
+                String temp = str;
+                str = sc.next();
+                check = Pattern.compile(pattern).matcher(str).matches();
                 if (!check) {
-                        System.out.print("Invalid last name");
-                        checkLastName();
+                        System.out.println(str + " is Invalid input");
+                        str = temp;
+                        checkValid(str, pattern);
                 }
                 else
-                        System.out.print("Last name is valid");
+                        System.out.println(str + " is Valid input");
         }
 
-	//UC3
-	public void checkEmail() {
-		System.out.print("\nEnter First Name(starts with capital letter and write minimum 3 letter): ");
-		email = sc.nextLine();
-		check = Pattern.compile(PATTERN_FOR_NAME).matcher(email).matches();
-		if (!check) {
-			System.out.print("Invalid first name");
-			checkFirstName();
-		}
-		else
-			System.out.print("First name is valid");
-	}
+        //UC9
+        public static void checkEmailArray() {
 
-
-
-	//UC4
-        public void checkPhoneNumber() {
-                System.out.print("\nEnter Phone Number(Eg. 91 9944778822): ");
-                phoneNumber = sc.nextLine();
-                check = Pattern.compile(PATTERN_FOR_PHONE_NUMBER).matcher(phoneNumber).matches();
-                if (!check) {
-                        System.out.print("Invalid Phone Number");
-                        checkPhoneNumber();
+                for (int i = 0; i < validId.length; i++) {
+                        System.out.println(validId[i]);
+                        check = Pattern.compile(PATTERN_FOR_EMAIL).matcher(validId[i]).matches();
+                        if (!check) {
+                                System.out.println("Invalid Email ID");
+                        }
+                        else
+                                System.out.println("Email ID is valid");
                 }
-                else
-                        System.out.print("Phone Number is valid");
-        }
 
-	//UC5, UC6, UC7 and UC8
-        public void checkPassword() {
-                System.out.print("\nEnter Password(8 to 12 character): ");
-                password = sc.nextLine();
-                check = Pattern.compile(PATTERN_FOR_PASSWORD).matcher(password).matches();
-                if (check)
-                       	System.out.print("valid Password");
-                else {
-                        System.out.print("Invalid Password");
-			checkPassword();
-		}
-        }
-
-	//UC9
-        public void checkEmailStrings() {
-
-		for (int i = 0; i < validId.length; i++) {
-			System.out.println(validId[i]);
-                	check = Pattern.compile(PATTERN_FOR_EMAIL).matcher(validId[i]).matches();
-               		if (!check) {
-                        	System.out.println("Invalid Email ID");
-                	}
-                	else
-                        	System.out.println("Email ID is valid");
-        	}
 		System.out.println();
-		for (int i = 0; i < invalidId.length; i++) {
-			System.out.println(invalidId[i]);
-                	check = Pattern.compile(PATTERN_FOR_EMAIL).matcher(invalidId[i]).matches();
-               		if (!check) {
-                        	System.out.println("Invalid Email ID");
-                	}
-                	else
-                        	System.out.println("Email ID is valid");
-        	}
-	}
 
-	//main
-	public static void main(String args[]) {
-		UserRegistration user = new UserRegistration();
+                for (int i = 0; i < invalidId.length; i++) {
+                        System.out.println(invalidId[i]);
+                        check = Pattern.compile(PATTERN_FOR_EMAIL).matcher(invalidId[i]).matches();
+                        if (!check) {
+                                System.out.println("Invalid Email ID");
+                        }
+                        else
+                                System.out.println("Email ID is valid");
+                }
+        }
 
-//		user.checkFirstName();
-//		user.checkLastName();
-//		user.checkEmail();
-//		user.checkPhoneNumber();
-//		user.checkPassword();
-		user.checkEmailStrings();
+        public static void choiceCheck() {
 
-	}
+                String choice;
+                System.out.println("\n1.First Name");
+                System.out.println("2.Last Name");
+                System.out.println("3.Email");
+                System.out.println("4.Phone Number");
+                System.out.println("5.Password");
+                System.out.println("6.Array of Emails");
+                System.out.println("7.Exit");
+
+                System.out.print("Enter your choice: ");
+                choice = sc.next();
+
+                switch(choice) {
+                        case "1":
+                                firstName = "First Name(starts with capital letter and write minimum 3 letter): ";
+                                checkValid(firstName, PATTERN_FOR_NAME);
+                                break;
+
+                        case "2":
+                                lastName = "Last Name(starts with capital letter and write minimum 3 letter): ";
+                                checkValid(lastName, PATTERN_FOR_NAME);
+                                break;
+
+                        case "3":
+                                email = "Email ID(Eg. abc.xyz@bl.co.in): ";
+                                checkValid(email, PATTERN_FOR_EMAIL);
+                                break;
+
+                        case "4":
+                                phoneNumber = "Phone Number(Eg. 91 9944778822): ";
+                                checkValid(phoneNumber, PATTERN_FOR_PHONE_NUMBER);
+                                break;
+
+                        case "5":
+                                password = "Password(8-12 characters)";
+                                checkValid(firstName, PATTERN_FOR_NAME);
+                                break;
+
+                        case "6":
+                                checkEmailArray();
+                                break;
+
+                        case "7":
+                                System.exit(0);
+
+                        default:
+                                System.out.println("Invalid Input try again");
+                }
+                choiceCheck();
+        }
+
+        //main
+        public static void main(String args[]) {
+                choiceCheck();
+        }
 }
-
